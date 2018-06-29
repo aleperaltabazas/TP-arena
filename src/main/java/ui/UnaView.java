@@ -14,6 +14,7 @@ public class UnaView extends MainWindow<UnViewModel> {
 
   @Override
   public void createContents(Panel mainPanel) {
+	  
   }
 
   public static void main(String[] args) {
