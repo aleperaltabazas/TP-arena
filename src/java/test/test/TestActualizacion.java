@@ -8,11 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import domain.Alumno;
-import domain.Repositorio;
 
 public class TestActualizacion {
 
-	Alumno mati = new Alumno("Matias", 1111111, Repositorio.instancia, "matigiorda", Arrays.asList());
+	Alumno mati = new Alumno("Matias", 1111111, "matigiorda", Arrays.asList());
 
 	@Before
 	public void start() {

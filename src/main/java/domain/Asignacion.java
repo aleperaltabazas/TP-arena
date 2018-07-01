@@ -7,13 +7,12 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Asignacion {
-	public List<Tarea> tareas;
+	public List<Tarea> tareas = new ArrayList<Tarea>(Arrays.asList());
+	private int codigo;
 
-	int codigo;
-
-	public Asignacion(int codigo) {
+	public Asignacion(int codigo, Tarea unaTarea) {
 		this.codigo = codigo;
-		this.tareas = new ArrayList<Tarea>(Arrays.asList());
+		this.tareas.add(unaTarea) ;
 	}
 
 	public int getCodigo() {

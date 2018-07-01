@@ -11,14 +11,17 @@ import domain.Alumno;
 import domain.Asignacion;
 import domain.NotaConceptual;
 import domain.NotaNumerica;
-import domain.Repositorio;
+import domain.Parcial;
 import domain.Tarea;
 
 public class TestAprobo {
-	Asignacion sistemasOperativos = new Asignacion(3003);
-	Asignacion disenioDeSistemas = new Asignacion(3004);
+	
+	Parcial example_parcial = new Parcial(new NotaNumerica(6));
+	
+	Asignacion sistemasOperativos = new Asignacion(3003, example_parcial);
+	Asignacion disenioDeSistemas = new Asignacion(3004, example_parcial);
 
-	Alumno lu = new Alumno("Lucila", 2222222, Repositorio.instancia, "lusalmeron",
+	Alumno lu = new Alumno("Lucila", 2222222, "lusalmeron",
 			Arrays.asList(disenioDeSistemas, sistemasOperativos));
 
 	NotaNumerica nota6 = new NotaNumerica(6);

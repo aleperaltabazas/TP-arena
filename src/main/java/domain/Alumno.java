@@ -6,17 +6,14 @@ import java.util.stream.IntStream;
 public class Alumno {
 	String nombre;
 	long legajo;
-	Repositorio repositorio;
 	String usuarioGit;
 	List<Asignacion> asignaciones;
 
-	public Alumno(String nombre, long legajo, Repositorio repositorio, String usuarioGit,
-			List<Asignacion> asignaciones) {
+	public Alumno(String nombre, long legajo, String usuarioGit, List<Asignacion> lasAsignaciones) {
 		this.nombre = nombre;
 		this.legajo = legajo;
-		this.repositorio = repositorio;
 		this.usuarioGit = usuarioGit;
-		this.asignaciones = asignaciones;
+		this.asignaciones = lasAsignaciones;
 	}
 
 	public IntStream consultarNotas(Asignacion asignacion) {
@@ -43,6 +40,18 @@ public class Alumno {
 
 	public List<Asignacion> getAsignaciones() {
 		return asignaciones;
+	}
+	
+	public void setNombre(String unNombre) {
+		this.nombre = unNombre;
+	}
+	
+	public void setLegajo(long unLegajo) {
+		this.legajo = unLegajo;
+	}
+	
+	public void setUsuarioGit(String unGit) {
+		this.usuarioGit = unGit;
 	}
 
 }
