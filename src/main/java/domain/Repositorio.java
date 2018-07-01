@@ -11,19 +11,29 @@ public class Repositorio {
 	public List<Asignacion> asignaciones;
 
 	public static Repositorio instancia = new Repositorio();
+	
 	private Repositorio() {
 		this.asignaciones = new ArrayList<Asignacion>(Arrays.asList());
 	}
 	
-	public Stream<Asignacion> getAsignaciones() {
-		return asignaciones.stream();
+	public List<Asignacion> getAsignaciones() {
+		return asignaciones;
 	}
+	
+	public Repositorio getInstancia() {
+		return Repositorio.instancia;
+	}
+	
 	public void setAsignaciones(ArrayList<Asignacion> asignaciones) {
 		this.asignaciones = asignaciones;
 	}
 
 	public IntStream encontrarAsignacion(int codigo, Alumno alumno) {
-		return (this.getAsignaciones().filter(a -> a.correspondeA(codigo, alumno)).findFirst().get().getTareas().mapToInt(t->t.getNota().getCalificacion()));
+		return (this.getAsignaciones().stream().filter(a -> a.correspondeA(codigo, alumno)).findFirst().get().getTareas().mapToInt(t->t.getNota().getCalificacion()));
+	}
+	
+	public void agregarAsignacion(Asignacion asignacion) {
+		instancia.getAsignaciones().add(asignacion);
 	}
 	
 }
