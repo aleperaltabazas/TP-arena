@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class TestCreacional {
 	
-	Alumno unAlumno = new Alumno("Ale", 1591591, Repositorio.instancia);
+	Alumno unAlumno = new Alumno("Ale", 1591591, Repositorio.instancia, "aleperaltabazas");
 	
 	Asignacion sistemasOperativos = new Asignacion(unAlumno, 3003);
 	Asignacion disenioDeSistemas = new Asignacion(unAlumno, 3004);
