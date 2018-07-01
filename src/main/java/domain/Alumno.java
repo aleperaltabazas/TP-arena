@@ -1,22 +1,26 @@
 package domain;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
-public class Alumno implements Usuario {
+public class Alumno {
 	String nombre;
 	long legajo;
 	Repositorio repositorio;
 	String usuarioGit;
+	List<Asignacion> asignaciones;
 
-	public Alumno(String nombre, long legajo, Repositorio repositorio, String usuarioGit) {
+	public Alumno(String nombre, long legajo, Repositorio repositorio, String usuarioGit,
+			List<Asignacion> asignaciones) {
 		this.nombre = nombre;
 		this.legajo = legajo;
 		this.repositorio = repositorio;
 		this.usuarioGit = usuarioGit;
+		this.asignaciones = asignaciones;
 	}
 
-	public IntStream consultarNotas(int codigo) {
-		return repositorio.encontrarAsignacion(codigo, this);
+	public IntStream consultarNotas(Asignacion asignacion) {
+		return asignacion.obtenerNotas();
 	}
 
 	public void actualizarDatos(String nuevoNombre, long nuevoLegajo, String nuevoUsuarioGit) {
@@ -35,6 +39,10 @@ public class Alumno implements Usuario {
 
 	public String getUsuarioGit() {
 		return usuarioGit;
+	}
+
+	public List<Asignacion> getAsignaciones() {
+		return asignaciones;
 	}
 
 }
