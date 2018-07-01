@@ -31,5 +31,20 @@ public class Asignacion {
 	public IntStream obtenerNotas() {
 		return tareas.stream().mapToInt(t -> t.getNota().getCalificacion());
 	}
+	
+	public boolean tieneTarea(Tarea tarea) {
+		return tareas.contains(tarea);
+	}
+	
+	public boolean aprobo(Tarea tarea) {
+		this.validar(tarea);
+		return tarea.aprobo();
+	}
+	
+	public void validar(Tarea tarea)  {
+		if(!this.tieneTarea(tarea)) {
+			throw new RuntimeException("Consultando tarea inválida.");
+		}
+	}
 
 }

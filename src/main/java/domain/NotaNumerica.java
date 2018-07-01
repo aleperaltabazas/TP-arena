@@ -10,4 +10,8 @@ public class NotaNumerica implements Nota {
 	public int getCalificacion() {
 		return this.nota;
 	}
+	
+	public boolean estaAprobado() {
+		return nota >= 6;
+	}
 }

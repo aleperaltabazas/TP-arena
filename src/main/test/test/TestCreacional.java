@@ -42,5 +42,11 @@ public class TestCreacional {
 		assertEquals(unAlumno.consultarNotas(sistemasOperativos).sum(),
 				sistemasOperativos.obtenerNotas().sum());
 	}
+	
+	@Test
+	public void testLasTareasDeSistemasOperativosEsTPYParcial() {
+		assertTrue(sistemasOperativos.tareas.contains(tp));
+		assertTrue(sistemasOperativos.tieneTarea(parcial));
+	}
 
 }
