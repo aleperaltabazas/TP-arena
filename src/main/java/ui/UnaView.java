@@ -8,6 +8,7 @@ import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MainWindow;
 
 import domain.Alumno;
@@ -22,10 +23,7 @@ import domain.TrabajoPractico;
 public class UnaView extends MainWindow<UnViewModel> {
 
 	public UnaView() {
-		super(new UnViewModel(new Alumno("Pepe", 1594887, "pepeperez",
-				Arrays.asList(new Asignacion(1, new TrabajoPractico(new NotaConceptual("E"))),
-						new Asignacion(2, new Parcial(new NotaNumerica(6))),
-						new Asignacion(3, new Parcial(new NotaNumerica(4)))))));
+		super(new UnViewModel());
 	}
 
 	@Override
@@ -61,15 +59,21 @@ public class UnaView extends MainWindow<UnViewModel> {
 		new Label(panelMedIzq).setText("Usuario Git:");
 		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("getGitAlumno");
 
-		new Button(panelInfIzq).setCaption("Modificar datos de usuario");
-		// .onClick(() -> new ViewModificarDatos().startApplication());
+		new Button(panelInfIzq).setCaption("Modificar datos de usuario")
+				.onClick(() -> new ViewModificarDatos().startApplication());
 
-		new Button(panelInfDer).setCaption("Ver notas");
-		// .onClick(() -> new ViewVerNotas().startApplication());
+		new Button(panelInfDer).setCaption("Ver notas").onClick(this::modificarDatos);
 
 	}
 
 	public static void main(String[] args) {
 		new UnaView().startApplication();
+	}
+
+	public void modificarDatos() {
+		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this);
+		dialogModificarDatos.open();
+		dialogModificarDatos.onAccept(() -> {
+		});
 	}
 }
