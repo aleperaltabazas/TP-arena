@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.WindowOwner;
 
 import domain.Alumno;
 import domain.Asignacion;
@@ -20,14 +21,14 @@ import domain.TrabajoPractico;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
-public class UnaView extends MainWindow<UnViewModel> {
+public class UnaView extends Dialog<UnViewModel> {
 
-	public UnaView() {
-		super(new UnViewModel());
+	public UnaView(WindowOwner owner) {
+		super(owner, new UnViewModel());
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
+	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Sistema de Notas");
 		mainPanel.setLayout(new VerticalLayout());
 
@@ -65,10 +66,6 @@ public class UnaView extends MainWindow<UnViewModel> {
 
 	}
 
-	public static void main(String[] args) {
-		new UnaView().startApplication();
-	}
-
 	public void modificarDatos() {
 		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this);
 		dialogModificarDatos.open();
@@ -82,4 +79,9 @@ public class UnaView extends MainWindow<UnViewModel> {
 		dialogVerNotas.onAccept(() -> {
 		});
 	}
+
+	public static void main(String args[]) {
+
+	}
+
 }

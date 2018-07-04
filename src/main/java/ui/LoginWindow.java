@@ -1,27 +1,29 @@
 package ui;
 
 import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.PasswordField;
+import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.WindowOwner;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
-public class LoginWindow extends MainWindow<UnViewModel> {
-	private static final long serialVersionUID = 1L;
+public class LoginWindow extends Dialog<UnViewModel> {
 	String userIngresado;
 	String passwordIngresada;
 
-	public LoginWindow() {
-		super(new UnViewModel());
+	public LoginWindow(WindowOwner owner) {
+		super(owner, new UnViewModel());
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
-
-	}
-
-	public static void main(String[] args) {
-		new LoginWindow().startApplication();
+	protected void createFormPanel(Panel mainPanel) {
+		TextBox userBox = new TextBox(mainPanel);
+		PasswordField pwBox = new PasswordField(mainPanel);
+		
+		userBox.bindValueToProperty("user");
+		pwBox.bindValueToProperty("password");
 	}
 
 	public void login() {
