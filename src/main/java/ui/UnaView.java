@@ -22,9 +22,11 @@ import domain.TrabajoPractico;
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
 public class UnaView extends Dialog<UnViewModel> {
+	Alumno alumno;
 
-	public UnaView(WindowOwner owner) {
-		super(owner, new UnViewModel());
+	public UnaView(WindowOwner owner, Alumno alumno) {
+		super(owner, new UnViewModel(alumno));
+		this.alumno = alumno;
 	}
 
 	@Override
@@ -67,14 +69,14 @@ public class UnaView extends Dialog<UnViewModel> {
 	}
 
 	public void modificarDatos() {
-		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this);
+		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this, this.getAlumno());
 		dialogModificarDatos.open();
 		dialogModificarDatos.onAccept(() -> {
 		});
 	}
 
 	public void verNotas() {
-		Dialog<?> dialogVerNotas = new VerNotasWindow(this);
+		Dialog<?> dialogVerNotas = new VerNotasWindow(this, this.getAlumno());
 		dialogVerNotas.open();
 		dialogVerNotas.onAccept(() -> {
 		});
@@ -84,4 +86,7 @@ public class UnaView extends Dialog<UnViewModel> {
 
 	}
 
+	public Alumno getAlumno() {
+		return this.alumno;
+	}
 }

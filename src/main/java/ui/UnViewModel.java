@@ -13,6 +13,14 @@ public class UnViewModel {
 	private long legajoAlumno;
 	private String gitAlumno;
 	private List<Asignacion> asignaciones;
+	
+	public UnViewModel(Alumno alumno) {
+		this.modelAlumno = alumno;
+		this.nombreAlumno = alumno.getNombre();
+		this.legajoAlumno = alumno.getLegajo();
+		this.gitAlumno = alumno.getUsuarioGit();
+		this.asignaciones = alumno.getAsignaciones();
+	}
 
 	public Alumno getModelAlumno() {
 		return modelAlumno;
