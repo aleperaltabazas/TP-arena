@@ -51,18 +51,17 @@ public class UnaView extends MainWindow<UnViewModel> {
 		new Label(panelSuperior).setText("¡Bienvenido! ¿Qué desea hacer?");
 
 		new Label(panelMedIzq).setText("Nombre:");
-		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("getNombreAlumno");
+		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("nombreAlumno");
 
 		new Label(panelMedIzq).setText("Legajo:");
-		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("getLegajoAlumno");
+		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("legajoAlumno");
 
 		new Label(panelMedIzq).setText("Usuario Git:");
-		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("getGitAlumno");
+		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("gitAlumno");
 
-		new Button(panelInfIzq).setCaption("Modificar datos de usuario")
-				.onClick(() -> new ViewModificarDatos().startApplication());
+		new Button(panelInfIzq).setCaption("Modificar datos de usuario").onClick(this::modificarDatos);
 
-		new Button(panelInfDer).setCaption("Ver notas").onClick(this::modificarDatos);
+		new Button(panelInfDer).setCaption("Ver notas").onClick(this::verNotas);
 
 	}
 
@@ -74,6 +73,13 @@ public class UnaView extends MainWindow<UnViewModel> {
 		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this);
 		dialogModificarDatos.open();
 		dialogModificarDatos.onAccept(() -> {
+		});
+	}
+
+	public void verNotas() {
+		Dialog<?> dialogVerNotas = new VerNotasWindow(this);
+		dialogVerNotas.open();
+		dialogVerNotas.onAccept(() -> {
 		});
 	}
 }
