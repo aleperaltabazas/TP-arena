@@ -58,7 +58,7 @@ public class RepositorioAlumnos {
 			throw new RuntimeException("No se encuentra registrado.");
 		}
 
-		return Alumno.class.cast(ret_alumno);
+		return ret_alumno.get();
 	}
 
 }
