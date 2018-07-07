@@ -7,9 +7,9 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import domain.Alumno;
 
-public class VerNotasWindow extends Dialog<UnViewModel> {
+public class VerNotasWindow extends Dialog<AlumnoLogeadoViewModel> {
 	public VerNotasWindow(WindowOwner owner, Alumno alumno) {
-		super(owner, new UnViewModel(alumno));
+		super(owner, new AlumnoLogeadoViewModel(alumno));
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import domain.Alumno;
 import domain.Asignacion;
 
 @Observable
-public class UnViewModel {
+public class AlumnoLogeadoViewModel {
 
 	private Alumno modelAlumno;
 	private String nombreAlumno;
@@ -14,7 +14,7 @@ public class UnViewModel {
 	private String gitAlumno;
 	private List<Asignacion> asignaciones;
 	
-	public UnViewModel(Alumno alumno) {
+	public AlumnoLogeadoViewModel(Alumno alumno) {
 		this.modelAlumno = alumno;
 		this.nombreAlumno = alumno.getNombre();
 		this.legajoAlumno = alumno.getLegajo();

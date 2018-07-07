@@ -7,13 +7,13 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import domain.Alumno;
 
-public class ModificarDatosWindow extends Dialog<UnViewModel> {
+public class ModificarDatosWindow extends Dialog<AlumnoLogeadoViewModel> {
 	String nombreIngresado;
 	String gitIngresado;
 	long legajoIngresado;
 
 	public ModificarDatosWindow(WindowOwner owner, Alumno alumno) {
-		super(owner, new UnViewModel(alumno));
+		super(owner, new AlumnoLogeadoViewModel(alumno));
 	}
 
 	@Override

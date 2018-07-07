@@ -23,11 +23,11 @@ import domain.User;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
-public class AlumnoLogeadoWindow extends Dialog<UnViewModel> {
+public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 	Alumno alumno;
 	
 	public AlumnoLogeadoWindow(WindowOwner owner, Alumno alumno) {
-		super(owner, new UnViewModel(alumno));
+		super(owner, new AlumnoLogeadoViewModel(alumno));
 		this.alumno = alumno;
 	}
 

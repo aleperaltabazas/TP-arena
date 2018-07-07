@@ -32,8 +32,21 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		pwBox.bindValueToProperty("password");
 
 		Button okButton = new Button(mainPanel).setCaption("Ok").onClick(this::login);
+		Button registerButton = new Button(mainPanel).setCaption("Registrar").onClick(this::registrar);
 	}
-
+		
+	public void registrar(){
+		String username = this.getModelObject().getUser();
+		String password = this.getModelObject().getPassword();
+		MessageDigest md = this.getModelObject().getHashed();
+		
+		User user = new User(username, password, md);
+		
+		Dialog<?> registerView = new RegistrarWindow(this, user);
+		registerView.open();
+		registerView.onAccept(null);
+	}
+	
 	public void login() {
 		this.getModelObject().login();
 
@@ -51,6 +64,7 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		Dialog<?> mainView = new AlumnoLogeadoWindow(this, alumno);
 		mainView.open();
 		mainView.onAccept(this::close);
+		mainView.onCancel(this::close);
 	}
 
 	public static void main(String[] args) {
