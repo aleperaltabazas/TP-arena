@@ -1,5 +1,7 @@
 package ui;
 
+import java.security.MessageDigest;
+
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.PasswordField;
@@ -10,6 +12,7 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import domain.Alumno;
 import domain.RepositorioAlumnos;
+import domain.User;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
@@ -27,20 +30,29 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 
 		userBox.bindValueToProperty("user");
 		pwBox.bindValueToProperty("password");
-		
+
 		Button okButton = new Button(mainPanel).setCaption("Ok").onClick(this::login);
 	}
 
 	public void login() {
 		this.getModelObject().login();
-		
-		Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(this.getModelObject().user);
-		
-		Dialog<?> mainView = new UnaView(this, alumno);
+
+		String username = this.getModelObject().getUser();
+		String password = this.getModelObject().getPassword();
+		MessageDigest hashed = this.getModelObject().getHashed();
+		User user = new User(username, password, hashed);
+
+		Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(user);
+
+		// La idea sería tener una clase intermedia o algo en el user tal que
+		// podamos saber si se logea un alumno o un profesor sin tener que usar
+		// ifs
+
+		Dialog<?> mainView = new AlumnoLogeadoWindow(this, alumno);
 		mainView.open();
 		mainView.onAccept(this::close);
 	}
-	
+
 	public static void main(String[] args) {
 		new LoginWindow().startApplication();
 	}

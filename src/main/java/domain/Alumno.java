@@ -3,13 +3,14 @@ package domain;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Alumno {
+public class Alumno extends User {
 	String nombre;
 	long legajo;
 	String usuarioGit;
 	List<Asignacion> asignaciones;
 
 	public Alumno(String nombre, long legajo, String usuarioGit, List<Asignacion> lasAsignaciones) {
+		super();
 		this.nombre = nombre;
 		this.legajo = legajo;
 		this.usuarioGit = usuarioGit;
@@ -41,15 +42,15 @@ public class Alumno {
 	public List<Asignacion> getAsignaciones() {
 		return asignaciones;
 	}
-	
+
 	public void setNombre(String unNombre) {
 		this.nombre = unNombre;
 	}
-	
+
 	public void setLegajo(long unLegajo) {
 		this.legajo = unLegajo;
 	}
-	
+
 	public void setUsuarioGit(String unGit) {
 		this.usuarioGit = unGit;
 	}

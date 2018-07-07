@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class RepositorioAlumnos {
 	private RepositorioAlumnos() {
@@ -11,7 +12,7 @@ public class RepositorioAlumnos {
 
 	public static RepositorioAlumnos instancia = new RepositorioAlumnos();
 
-	public ArrayList<Alumno> alumnos;
+	public ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
 
 	public static void setInstancia(RepositorioAlumnos instancia) {
 		RepositorioAlumnos.instancia = instancia;
@@ -26,15 +27,38 @@ public class RepositorioAlumnos {
 	}
 
 	public void agregarAlumno(Alumno alumno) {
+		this.validarNoExiste(alumno);
 		alumnos.add(alumno);
 	}
 
-	public Alumno dameAlumno(String nombre) {
-		/*if (!this.getAlumnos().stream().anyMatch(a -> a.getNombre() == nombre)) {
-			throw new RuntimeException("El alumno no se encuentra en la base de datos.");
-		}*/
+	public void validarNoExiste(Alumno alumno) {
+		if (this.getAlumnos().stream().anyMatch(a -> a.getLegajo() == alumno.getLegajo())) {
+			throw new RuntimeException("Entrada repetida.");
+		}
+	}
 
-		return new Alumno("Gaston Prieto", 666, "Gaston.Prieto.UTN", Arrays.asList());
+	public Alumno dameAlumno(User user) {
+		return this.find(user);
+
+	}
+
+	public void validarExiste(User user) {
+		if (!this.getAlumnos().stream().anyMatch(u -> u.getUsername() == user.getUsername())) {
+			throw new RuntimeException();
+		}
+	}
+
+	public Alumno find(User user) {
+		this.validarExiste(user);
+
+		Optional<Alumno> ret_alumno = this.getAlumnos().stream().filter(a -> a.getUsername() == user.getUsername())
+				.findFirst();
+
+		if (!ret_alumno.isPresent()) {
+			throw new RuntimeException("No se encuentra registrado.");
+		}
+
+		return Alumno.class.cast(ret_alumno);
 	}
 
 }

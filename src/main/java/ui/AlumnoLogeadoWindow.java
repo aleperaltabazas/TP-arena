@@ -17,14 +17,16 @@ import domain.Asignacion;
 import domain.NotaConceptual;
 import domain.NotaNumerica;
 import domain.Parcial;
+import domain.RepositorioAlumnos;
 import domain.TrabajoPractico;
+import domain.User;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
-public class UnaView extends Dialog<UnViewModel> {
+public class AlumnoLogeadoWindow extends Dialog<UnViewModel> {
 	Alumno alumno;
-
-	public UnaView(WindowOwner owner, Alumno alumno) {
+	
+	public AlumnoLogeadoWindow(WindowOwner owner, Alumno alumno) {
 		super(owner, new UnViewModel(alumno));
 		this.alumno = alumno;
 	}
