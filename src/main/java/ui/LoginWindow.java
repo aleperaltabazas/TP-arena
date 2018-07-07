@@ -3,6 +3,7 @@ package ui;
 import java.security.MessageDigest;
 
 import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.PasswordField;
 import org.uqbar.arena.widgets.TextBox;
@@ -25,7 +26,16 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 
 	@Override
 	public void createContents(Panel mainPanel) {
+		Label username = new Label(mainPanel);
+		username.alignLeft();
+		username.setText("User");
+		
 		TextBox userBox = new TextBox(mainPanel);
+		
+		Label password = new Label(mainPanel);
+		password.alignLeft();
+		password.setText("Password");
+		
 		PasswordField pwBox = new PasswordField(mainPanel);
 
 		userBox.bindValueToProperty("user");
@@ -45,6 +55,7 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		Dialog<?> registerView = new RegistrarWindow(this, user);
 		registerView.open();
 		registerView.onAccept(null);
+		registerView.onCancel(null);
 	}
 	
 	public void login() {
