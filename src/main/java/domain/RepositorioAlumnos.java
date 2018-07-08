@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class RepositorioAlumnos {
 	private RepositorioAlumnos() {
-		this.agregarAlumno(new Alumno("a", 1, "a", "a", "a"));
+
 	}
 
 	public void resetAlumnos() {
@@ -42,7 +42,7 @@ public class RepositorioAlumnos {
 	}
 
 	public Alumno dameAlumno(User user) {
-		return this.find(user);
+		return this.find(user.getUsername());
 
 	}
 
@@ -50,8 +50,15 @@ public class RepositorioAlumnos {
 		return this.getAlumnos().stream().anyMatch(a -> a.equals(alumno));
 	}
 
-	public Alumno find(User user) {
-		Optional<Alumno> ret_alumno = this.getAlumnos().stream().filter(a -> a.getUsername().equals(user.getUsername()))
+	public void validarNull(Object obj) {
+		if (obj.equals(null)) {
+			throw new NullPointerException("Null user");
+		}
+	}
+
+	public Alumno find(String username) {
+		this.validarNull(username);
+		Optional<Alumno> ret_alumno = this.getAlumnos().stream().filter(a -> a.getUsername().equalsIgnoreCase(username))
 				.findFirst();
 
 		if (!ret_alumno.isPresent()) {

@@ -9,24 +9,22 @@ import domain.*;
 import ui.LoginViewModel;
 
 public class TestLogin {
-	LoginViewModel vm1 = new LoginViewModel();
-	LoginViewModel vm2 = new LoginViewModel();
+	User user1 = new User();
+	User user2 = new User();
 
 	@Before
 	public void start() {
-		vm1.setPassword("123");
-		vm2.setPassword("456");
-		
-		vm1.hash();
-		System.out.println(vm1.getHashText());
-		vm2.hash();
-		System.out.println(vm2.getHashText());
+		user1.setPassword("123");
+		user2.setPassword("456");
+
+		user1.hash();
+		user2.hash();
 	}
 
 	@Test
 	public void testHasheo123Y456YDaDiferente() {
-		
-		assertTrue(!vm1.getHashText().equals(vm2.getHashText()));
+
+		assertTrue(!user1.getHashText().equals(user2.getHashText()));
 	}
 
 }
