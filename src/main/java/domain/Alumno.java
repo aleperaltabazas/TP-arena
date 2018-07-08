@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -15,6 +16,13 @@ public class Alumno extends User {
 		this.legajo = legajo;
 		this.usuarioGit = usuarioGit;
 		this.asignaciones = lasAsignaciones;
+	}
+
+	public Alumno(String nombre, long legajo, String usuarioGit, String username, String password) {
+		super(username, password);
+		this.nombre = nombre;
+		this.legajo = legajo;
+		this.asignaciones = Arrays.asList();
 	}
 
 	public IntStream consultarNotas(Asignacion asignacion) {

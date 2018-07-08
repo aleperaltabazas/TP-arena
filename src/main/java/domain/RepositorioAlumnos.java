@@ -10,6 +10,10 @@ public class RepositorioAlumnos {
 
 	}
 
+	public void resetAlumnos() {
+		this.alumnos.clear();
+	}
+
 	public static RepositorioAlumnos instancia = new RepositorioAlumnos();
 
 	public ArrayList<Alumno> alumnos = new ArrayList<Alumno>();

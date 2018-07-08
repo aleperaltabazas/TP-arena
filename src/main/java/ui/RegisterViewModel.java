@@ -23,22 +23,21 @@ public class RegisterViewModel {
 
 	public RegisterViewModel(User user) {
 		this.user = user;
+		this.username = user.getUsername();
+		this.password = user.getPassword();
 	}
 
 	public void crearAlumno() {
 		this.validarElementos();
 		Alumno nuevoAlumno = new Alumno(this.getNombreAlumno(), this.getLegajoAlumno(), this.getGitAlumno(),
-				Arrays.asList());
-
-		nuevoAlumno.setHashed(this.hashed);
-		nuevoAlumno.setUsername(this.username);
+				this.getUsername(), this.getPassword());
 
 		RepositorioAlumnos.instancia.agregarAlumno(nuevoAlumno);
 	}
 
 	public void validarElementos() {
-		if (nombreAlumno.equals(null) || legajoAlumno < 0 || gitAlumno.equals(null) || password.equals(null)
-				|| username.equals(null)) {
+		if (nombreAlumno.equals(null) || legajoAlumno <= 0 || gitAlumno.equals(null) || username.equals(null)
+				|| password.equals(null)) {
 			throw new RuntimeException("Error en la creación del alumno");
 		}
 	}

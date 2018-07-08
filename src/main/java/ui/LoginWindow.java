@@ -29,13 +29,13 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		Label username = new Label(mainPanel);
 		username.alignLeft();
 		username.setText("User");
-		
+
 		TextBox userBox = new TextBox(mainPanel);
-		
+
 		Label password = new Label(mainPanel);
 		password.alignLeft();
 		password.setText("Password");
-		
+
 		PasswordField pwBox = new PasswordField(mainPanel);
 
 		userBox.bindValueToProperty("user");
@@ -44,27 +44,22 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		Button okButton = new Button(mainPanel).setCaption("Ok").onClick(this::login);
 		Button registerButton = new Button(mainPanel).setCaption("Registrar").onClick(this::registrar);
 	}
-		
-	public void registrar(){
-		String username = this.getModelObject().getUser();
-		String password = this.getModelObject().getPassword();
-		MessageDigest md = this.getModelObject().getHashed();
-		
-		User user = new User(username, password, md);
-		
-		Dialog<?> registerView = new RegistrarWindow(this, user);
+
+	public void registrar() {
+		Dialog<?> registerView = new RegistrarWindow(this, new User());
 		registerView.open();
 		registerView.onAccept(null);
 		registerView.onCancel(null);
 	}
-	
+
 	public void login() {
 		this.getModelObject().login();
 
 		String username = this.getModelObject().getUser();
 		String password = this.getModelObject().getPassword();
 		MessageDigest hashed = this.getModelObject().getHashed();
-		User user = new User(username, password, hashed);
+		User user = new User(username, password);
+		user.setHashed(hashed);
 
 		Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(user);
 

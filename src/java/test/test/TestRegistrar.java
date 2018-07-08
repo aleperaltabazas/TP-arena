@@ -9,22 +9,40 @@ import domain.User;
 import ui.RegisterViewModel;
 
 public class TestRegistrar {
-	User user = new User();
-	RegisterViewModel registerVM;
-	
+	User unUser = new User("Carlos", "123");
+	RegisterViewModel registerVM = new RegisterViewModel(unUser);
+
 	@Before
-	public void start(){
-		user.setUsername("Carlitos");
-		user.setPassword("1233");
-		
-		registerVM = new RegisterViewModel(user);
-	}
-	
-	@Test
-	public void testLlamoACrearAlumnoYApareceEnElRepositorio() {
-		registerVM.crearAlumno();
-		Alumno unAlumno = RepositorioAlumnos.instancia.dameAlumno(user);
-		assertTrue(unAlumno.getUsername().equals(user.getUsername()));
+	public void start() {
+		RepositorioAlumnos.instancia.resetAlumnos();
 	}
 
+	@Test(expected = RuntimeException.class)
+	public void testLlamoACrearAlumnoYTiraExcepcion() {
+		registerVM.setGitAlumno("carlitos");
+		registerVM.setNombreAlumno("carlinho");
+
+		registerVM.crearAlumno();
+	}
+
+	@Test
+	public void testCreoUnAlumnoYApareceEnElRepo() {
+		registerVM.setGitAlumno("carlitos");
+		registerVM.setNombreAlumno("carlinho");
+		registerVM.setLegajoAlumno(123);
+
+		registerVM.crearAlumno();
+
+		Alumno unAlumno = RepositorioAlumnos.instancia.dameAlumno(unUser);
+		assertTrue(unAlumno.getUsername().equals(unUser.getUsername()));
+	}
+
+	@Test
+	public void testValidoElUserYPasaOk() {
+		registerVM.setGitAlumno("carlitos");
+		registerVM.setNombreAlumno("carlinho");
+		registerVM.setLegajoAlumno(123);
+
+		registerVM.validarElementos();
+	}
 }

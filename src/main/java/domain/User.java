@@ -13,10 +13,10 @@ public class User {
 
 	}
 
-	public User(String username, String password, MessageDigest hashed) {
+	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-		this.hashed = hashed;
+		this.hash();
 	}
 
 	public String getUsername() {
@@ -43,4 +43,14 @@ public class User {
 		this.hashed = hashed;
 	}
 
+	public void hash() {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(this.getPassword().getBytes(), 0, this.getPassword().length());
+			md.digest();
+			this.setHashed(md);
+		} catch (NoSuchAlgorithmException except) {
+			except.printStackTrace();
+		}
+	}
 }
