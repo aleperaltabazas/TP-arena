@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class RepositorioAlumnos {
 	private RepositorioAlumnos() {
-
+		this.agregarAlumno(new Alumno("a", 1, "a", "a", "a"));
 	}
 
 	public void resetAlumnos() {
@@ -46,16 +46,12 @@ public class RepositorioAlumnos {
 
 	}
 
-	public void validarExiste(User user) {
-		if (!this.getAlumnos().stream().anyMatch(u -> u.getUsername() == user.getUsername())) {
-			throw new RuntimeException();
-		}
+	public boolean estaRegistrado(Alumno alumno) {
+		return this.getAlumnos().stream().anyMatch(a -> a.equals(alumno));
 	}
 
 	public Alumno find(User user) {
-		this.validarExiste(user);
-
-		Optional<Alumno> ret_alumno = this.getAlumnos().stream().filter(a -> a.getUsername() == user.getUsername())
+		Optional<Alumno> ret_alumno = this.getAlumnos().stream().filter(a -> a.getUsername().equals(user.getUsername()))
 				.findFirst();
 
 		if (!ret_alumno.isPresent()) {

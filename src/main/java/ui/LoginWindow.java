@@ -18,8 +18,6 @@ import domain.User;
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
 public class LoginWindow extends MainWindow<LoginViewModel> {
-	LoginViewModel viewModel;
-
 	public LoginWindow() {
 		super(new LoginViewModel());
 	}
@@ -48,8 +46,10 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 	public void registrar() {
 		Dialog<?> registerView = new RegistrarWindow(this, new User());
 		registerView.open();
-		registerView.onAccept(null);
-		registerView.onCancel(null);
+		registerView.onAccept(() -> {
+		});
+		registerView.onCancel(() -> {
+		});
 	}
 
 	public void login() {
@@ -57,19 +57,21 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 
 		String username = this.getModelObject().getUser();
 		String password = this.getModelObject().getPassword();
-		MessageDigest hashed = this.getModelObject().getHashed();
 		User user = new User(username, password);
-		user.setHashed(hashed);
 
+		System.out.println(user.getUsername());
+		
 		Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(user);
 
+		
 		// La idea sería tener una clase intermedia o algo en el user tal que
 		// podamos saber si se logea un alumno o un profesor sin tener que usar
 		// ifs
 
 		Dialog<?> mainView = new AlumnoLogeadoWindow(this, alumno);
 		mainView.open();
-		mainView.onAccept(this::close);
+		mainView.onAccept(() -> {
+		});
 		mainView.onCancel(this::close);
 	}
 

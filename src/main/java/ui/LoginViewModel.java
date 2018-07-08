@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -36,14 +37,27 @@ public class LoginViewModel {
 	}
 
 	public String getHashText() {
-		return this.getHashed().toString();
+		try {
+			String md = this.byteToHexString(this.getHashed().digest(this.password.getBytes("UTF-8")));
+			return md;
+		} catch (UnsupportedEncodingException e) {
+			return null;
+		}
+	}
+
+	public String byteToHexString(byte[] input) {
+		String output = "";
+		for (int i = 0; i < input.length; ++i) {
+			output += String.format("%02X", input[i]);
+		}
+		return output;
 	}
 
 	public void login() {
 		if (user.equals(null) || password.equals(null)) {
 			throw new NullPointerException("Usuario o contraseña inválida.");
 		}
-		
+
 		this.hash();
 	}
 

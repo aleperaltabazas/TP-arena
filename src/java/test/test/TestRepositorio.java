@@ -17,7 +17,7 @@ public class TestRepositorio {
 
 	@Before
 	public void start() {
-		RepositorioAlumnos.instancia.alumnos.clear();
+		RepositorioAlumnos.instancia.resetAlumnos();
 
 		mati.setUsername("MatiGiorda");
 		mati.setPassword("13");
