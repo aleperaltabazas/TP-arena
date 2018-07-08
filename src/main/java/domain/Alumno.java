@@ -22,6 +22,7 @@ public class Alumno extends User {
 		super(username, password);
 		this.nombre = nombre;
 		this.legajo = legajo;
+		this.usuarioGit = usuarioGit;
 		this.asignaciones = Arrays.asList();
 	}
 
