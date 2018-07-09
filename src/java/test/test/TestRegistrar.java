@@ -30,6 +30,7 @@ public class TestRegistrar {
 		registerVM.setGitAlumno("carlitos");
 		registerVM.setNombreAlumno("carlinho");
 		registerVM.setLegajoAlumno(123);
+		registerVM.setPassword("123");
 
 		registerVM.crearAlumno();
 
@@ -42,6 +43,7 @@ public class TestRegistrar {
 		registerVM.setGitAlumno("carlitos");
 		registerVM.setNombreAlumno("carlinho");
 		registerVM.setLegajoAlumno(123);
+		registerVM.setPassword("123");
 
 		registerVM.validarElementos();
 	}

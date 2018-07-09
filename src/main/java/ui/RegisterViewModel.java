@@ -8,6 +8,7 @@ import org.uqbar.commons.model.annotations.Observable;
 
 import domain.Alumno;
 import domain.RepositorioAlumnos;
+import domain.RepositorioUsuarios;
 import domain.User;
 
 @Observable
@@ -23,8 +24,8 @@ public class RegisterViewModel {
 
 	public RegisterViewModel(User user) {
 		this.user = user;
-		this.username = user.getUsername();
-		this.password = user.getPassword();
+		this.setUsername(user.getUsername());
+		this.setHashed(user.getHashed());
 	}
 
 	public void crearAlumno() {
@@ -32,6 +33,9 @@ public class RegisterViewModel {
 		Alumno nuevoAlumno = new Alumno(this.getNombreAlumno(), this.getLegajoAlumno(), this.getGitAlumno(),
 				this.getUsername(), this.getPassword());
 
+		User nuevoUser = new User(this.getUsername(), this.getPassword());
+
+		RepositorioUsuarios.instancia.agregarUsuario(nuevoUser);
 		RepositorioAlumnos.instancia.agregarAlumno(nuevoAlumno);
 	}
 

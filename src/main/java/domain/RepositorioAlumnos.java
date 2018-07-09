@@ -36,7 +36,7 @@ public class RepositorioAlumnos extends Repositorio {
 	}
 
 	public void validarNoExiste(Alumno alumno) {
-		if (this.getAlumnos().stream().anyMatch(a -> a.getLegajo() == alumno.getLegajo())) {
+		if (this.getAlumnos().stream().anyMatch(a -> a.getUsername().equals(alumno.getUsername()))) {
 			throw new RuntimeException("Entrada repetida.");
 		}
 	}

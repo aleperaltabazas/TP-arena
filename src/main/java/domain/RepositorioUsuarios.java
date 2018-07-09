@@ -1,5 +1,6 @@
 package domain;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -31,20 +32,32 @@ public class RepositorioUsuarios extends Repositorio {
 		this.usuarios.clear();
 	}
 
+	public void autenticar(User usuario) {
+		this.validarNull(usuario);
+		this.identificar(usuario);
+		this.validarPassword(usuario.getUsername(), usuario.getHashed());
+	}
+
+	public void identificar(User usuario) {
+		if (!this.estaRegistrado(usuario)) {
+			throw new RuntimeException("Esa combinación de usuario y contraseña no existe.");
+		}
+	}
+
 	public boolean estaRegistrado(User usuario) {
 		return this.getUsuarios().stream().anyMatch(u -> u.getUsername().equals(usuario.getUsername()));
 	}
 
-	public void validarPassword(String username, String hashed) {
+	public void validarPassword(String username, MessageDigest digest) {
 		User user = this.dameUsuario(username);
-		if (!user.getHashText().equals(hashed)) {
+		if (!user.getHashed().equals(digest)) {
 			throw new RuntimeException("Combinación incorrecta.");
 		}
 	}
 
 	public void agregarUsuario(User usuario) {
-		this.validarDuplicado(usuario);
 		this.validarNull(usuario);
+		this.validarDuplicado(usuario);
 		usuarios.add(usuario);
 	}
 

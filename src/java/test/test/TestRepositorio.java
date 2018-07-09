@@ -79,20 +79,4 @@ public class TestRepositorio {
 		repoUsuarios.agregarUsuario(null);
 	}
 
-	@Test
-	public void testAgregoAMatiYLaLogeoConSuUsuarioYContraseña() {
-		repoUsuarios.agregarUsuario(userMati);
-
-		User test = repoUsuarios.dameUsuario(userMati.getUsername());
-
-		repoUsuarios.validarPassword(userMati.getUsername(), userMati.getHashText());
-	}
-
-	@Test(expected = RuntimeException.class)
-	public void testAgregoAMatiYLoLogeoConOtraContraseñaYFalla() {
-		repoUsuarios.agregarUsuario(userMati);
-
-		repoUsuarios.validarPassword(userMati.getUsername(), "a");
-	}
-
 }
