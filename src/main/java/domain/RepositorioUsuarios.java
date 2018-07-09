@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public class RepositorioUsuarios {
+public class RepositorioUsuarios extends Repositorio {
 	private RepositorioUsuarios() {
 
 	}
@@ -36,7 +36,7 @@ public class RepositorioUsuarios {
 	}
 
 	public void validarPassword(String username, String hashed) {
-		User user = this.find(username);
+		User user = this.dameUsuario(username);
 		if (!user.getHashText().equals(hashed)) {
 			throw new RuntimeException("Combinación incorrecta.");
 		}
@@ -54,20 +54,8 @@ public class RepositorioUsuarios {
 		}
 	}
 
-	public void validarNull(Object obj) {
-		if (obj.equals(null)) {
-			throw new NullPointerException("Null user");
-		}
+	public User dameUsuario(String username) {
+		return this.find(username, this.getUsuarios());
 	}
 
-	public User find(String username) {
-		this.validarNull(username);
-		Optional<User> ret_user = this.getUsuarios().stream().filter(u -> u.getUsername().equals(username)).findFirst();
-
-		if (!ret_user.isPresent()) {
-			throw new RuntimeException("Usuario no encontrado.");
-		}
-
-		return ret_user.get();
-	}
 }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class RepositorioAlumnos {
+public class RepositorioAlumnos extends Repositorio {
 	private RepositorioAlumnos() {
 
 	}
@@ -42,30 +42,12 @@ public class RepositorioAlumnos {
 	}
 
 	public Alumno dameAlumno(User user) {
-		return this.find(user.getUsername());
+		return this.findAlumno(user.getUsername(), this.getAlumnos());
 
 	}
 
 	public boolean estaRegistrado(Alumno alumno) {
 		return this.getAlumnos().stream().anyMatch(a -> a.equals(alumno));
-	}
-
-	public void validarNull(Object obj) {
-		if (obj.equals(null)) {
-			throw new NullPointerException("Null user");
-		}
-	}
-
-	public Alumno find(String username) {
-		this.validarNull(username);
-		Optional<Alumno> ret_alumno = this.getAlumnos().stream().filter(a -> a.getUsername().equalsIgnoreCase(username))
-				.findFirst();
-
-		if (!ret_alumno.isPresent()) {
-			throw new RuntimeException("No se encuentra registrado.");
-		}
-
-		return ret_alumno.get();
 	}
 
 }

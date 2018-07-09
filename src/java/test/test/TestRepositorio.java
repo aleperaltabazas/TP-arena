@@ -64,14 +64,14 @@ public class TestRepositorio {
 	@Test
 	public void testAgregoAMatiYLoBuscoEnElRepoDeUsuarios() {
 		repoUsuarios.agregarUsuario(userMati);
-		User testUser = repoUsuarios.find(userMati.getUsername());
+		User testUser = repoUsuarios.dameUsuario(userMati.getUsername());
 
 		assertTrue(testUser.getUsername().equals(userMati.getUsername()));
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testBuscoAAleYFalla() {
-		repoUsuarios.find(userAle.getUsername());
+		repoUsuarios.dameUsuario(userAle.getUsername());
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -83,7 +83,7 @@ public class TestRepositorio {
 	public void testAgregoAMatiYLaLogeoConSuUsuarioYContraseña() {
 		repoUsuarios.agregarUsuario(userMati);
 
-		User test = repoUsuarios.find(userMati.getUsername());
+		User test = repoUsuarios.dameUsuario(userMati.getUsername());
 
 		repoUsuarios.validarPassword(userMati.getUsername(), userMati.getHashText());
 	}
