@@ -1,7 +1,10 @@
 package ui;
 
+import java.awt.Color;
 import java.security.MessageDigest;
 
+import org.uqbar.arena.layout.ColumnLayout;
+import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -25,23 +28,42 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 
 	@Override
 	public void createContents(Panel mainPanel) {
-		Label username = new Label(mainPanel);
-		username.alignLeft();
-		username.setText("User");
+		this.setTitle("Sistema de Notas");
 
-		TextBox userBox = new TextBox(mainPanel);
+		//this.setIconImage("tree.png");
 
-		Label password = new Label(mainPanel);
-		password.alignLeft();
-		password.setText("Password");
+		Panel panelSuperior = new Panel(mainPanel).setLayout(new VerticalLayout());
 
-		PasswordField pwBox = new PasswordField(mainPanel);
+		Panel panelUsuario = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+		Panel panelContrasenia = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+
+		Panel panelBotones = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+
+		Label username = new Label(panelUsuario).setText("Nombre de usuario");
+		TextBox userBox = new TextBox(panelUsuario);
+
+		Label password = new Label(panelContrasenia).setText("Contrseña");
+		PasswordField passwordBox = new PasswordField(panelContrasenia);
+
+		Button okButton = new Button(panelBotones).setCaption("Ok");
+		Button registerButton = new Button(panelBotones).setCaption("Registrar");
+
+		new Label(panelSuperior).setText("Ingrese su usuario y contraseña.");
 
 		userBox.bindValueToProperty("user");
-		pwBox.bindValueToProperty("password");
+		passwordBox.bindValueToProperty("password");
 
-		Button okButton = new Button(mainPanel).setCaption("Ok").onClick(this::login);
-		Button registerButton = new Button(mainPanel).setCaption("Registrar").onClick(this::registrar);
+		userBox.setWidth(120);
+		passwordBox.setWidth(120);
+
+		okButton.setWidth(80);
+		okButton.alignCenter();
+
+		registerButton.setWidth(80);
+		registerButton.alignCenter();
+
+		okButton.onClick(this::login);
+		registerButton.onClick(this::registrar);
 	}
 
 	public void registrar() {

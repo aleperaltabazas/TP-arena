@@ -1,5 +1,6 @@
 package ui;
 
+import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -18,29 +19,45 @@ public class RegistrarWindow extends Dialog<RegisterViewModel> {
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
+		Panel panelUsuario = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+		Panel panelContrasenia = new Panel(mainPanel).setLayout(new ColumnLayout(2));
 
-		Label nombre = new Label(mainPanel);
-		TextBox nombre_box = new TextBox(mainPanel);
-		Label legajo = new Label(mainPanel);
-		TextBox legajo_box = new TextBox(mainPanel);
-		Label git = new Label(mainPanel);
-		TextBox git_box = new TextBox(mainPanel);
-		Label username = new Label(mainPanel);
-		TextBox username_box = new TextBox(mainPanel);
-		Label password = new Label(mainPanel);
-		PasswordField pwBox = new PasswordField(mainPanel);
+		Panel panelNombre = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+		Panel panelLegajo = new Panel(mainPanel).setLayout(new ColumnLayout(2));
+		Panel panelGit = new Panel(mainPanel).setLayout(new ColumnLayout(2));
 
-		nombre.setText("Nombre");
-		legajo.setText("Legajo");
-		git.setText("Github");
-		username.setText("Username");
-		password.setText("Password");
+		Label username = new Label(panelUsuario);
+		TextBox usernameBox = new TextBox(panelUsuario);
 
-		nombre_box.bindValueToProperty("nombreAlumno");
-		legajo_box.bindValueToProperty("legajoAlumno");
-		git_box.bindValueToProperty("gitAlumno");
-		username_box.bindValueToProperty("username");
-		pwBox.bindValueToProperty("password");
+		Label password = new Label(panelContrasenia);
+		PasswordField passwordBox = new PasswordField(panelContrasenia);
+
+		Label nombre = new Label(panelNombre);
+		TextBox nombreBox = new TextBox(panelNombre);
+
+		Label legajo = new Label(panelLegajo);
+		TextBox legajoBox = new TextBox(panelLegajo);
+
+		Label git = new Label(panelGit);
+		TextBox gitBox = new TextBox(panelGit);
+
+		nombre.setText("Nombre").setWidth(80);
+		legajo.setText("Legajo").setWidth(80);
+		git.setText("Github").setWidth(80);
+		username.setText("Username").setWidth(80);
+		password.setText("Password").setWidth(80);
+
+		nombreBox.setWidth(120).alignLeft();
+		legajoBox.setWidth(120).alignLeft();
+		gitBox.setWidth(120).alignLeft();
+		usernameBox.setWidth(120).alignLeft();
+		passwordBox.setWidth(120);
+
+		nombreBox.bindValueToProperty("nombreAlumno");
+		legajoBox.bindValueToProperty("legajoAlumno");
+		gitBox.bindValueToProperty("gitAlumno");
+		usernameBox.bindValueToProperty("username");
+		passwordBox.bindValueToProperty("password");
 
 		Button okButton = new Button(mainPanel).setCaption("Ok").onClick(this::registrar);
 	}

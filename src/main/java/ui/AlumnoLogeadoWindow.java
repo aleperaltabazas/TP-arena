@@ -25,7 +25,7 @@ import domain.User;
 @SuppressWarnings("serial")
 public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 	Alumno alumno;
-	
+
 	public AlumnoLogeadoWindow(WindowOwner owner, Alumno alumno) {
 		super(owner, new AlumnoLogeadoViewModel(alumno));
 		this.alumno = alumno;
@@ -56,13 +56,13 @@ public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 		new Label(panelSuperior).setText("¡Bienvenido! ¿Qué desea hacer?");
 
 		new Label(panelMedIzq).setText("Nombre:");
-		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("nombreAlumno");
+		new Label(panelMedDer).setWidth(120).bindValueToProperty("nombreAlumno");
 
 		new Label(panelMedIzq).setText("Legajo:");
-		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("legajoAlumno");
+		new Label(panelMedDer).setWidth(120).bindValueToProperty("legajoAlumno");
 
 		new Label(panelMedIzq).setText("Usuario Git:");
-		new Label(panelMedDer).setBackground(Color.WHITE).bindValueToProperty("gitAlumno");
+		new Label(panelMedDer).setWidth(120).bindValueToProperty("gitAlumno");
 
 		new Button(panelInfIzq).setCaption("Modificar datos de usuario").onClick(this::modificarDatos);
 
