@@ -25,7 +25,6 @@ public class RegisterViewModel {
 	public RegisterViewModel(User user) {
 		this.user = user;
 		this.setUsername(user.getUsername());
-		this.setHashed(user.getHashed());
 	}
 
 	public void crearAlumno() {

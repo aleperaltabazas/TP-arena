@@ -1,6 +1,8 @@
 package domain;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -32,10 +34,10 @@ public class RepositorioUsuarios extends Repositorio {
 		this.usuarios.clear();
 	}
 
-	public void autenticar(User usuario) {
+	public void autenticar(User usuario, String password) {
 		this.validarNull(usuario);
 		this.identificar(usuario);
-		this.validarPassword(usuario.getUsername(), usuario.getHashed());
+		this.validarPassword(usuario, password);
 	}
 
 	public void identificar(User usuario) {
@@ -48,9 +50,10 @@ public class RepositorioUsuarios extends Repositorio {
 		return this.getUsuarios().stream().anyMatch(u -> u.getUsername().equals(usuario.getUsername()));
 	}
 
-	public void validarPassword(String username, MessageDigest digest) {
-		User user = this.dameUsuario(username);
-		if (!user.getHashed().equals(digest)) {
+	public void validarPassword(User usuario, String password) {
+		User user = this.dameUsuario(usuario.getUsername());
+
+		if (!user.getDigest().equals(usuario.getDigest())) {
 			throw new RuntimeException("Combinación incorrecta.");
 		}
 	}
@@ -69,6 +72,25 @@ public class RepositorioUsuarios extends Repositorio {
 
 	public User dameUsuario(String username) {
 		return this.find(username, this.getUsuarios());
+	}
+
+	public String byteToHexString(byte[] input) {
+		String output = "";
+		for (int i = 0; i < input.length; ++i) {
+			output += String.format("%02X", input[i]);
+		}
+		return output;
+	}
+
+	public String hash(String value) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			return byteToHexString(md.digest(value.getBytes("UTF-8")));
+		} catch (NoSuchAlgorithmException e) {
+			return null;
+		} catch (UnsupportedEncodingException e) {
+			return null;
+		}
 	}
 
 }

@@ -6,8 +6,7 @@ import java.security.MessageDigest;
 
 public class User {
 	String username;
-
-	MessageDigest hashed;
+	String digest;
 
 	public User() {
 
@@ -15,7 +14,7 @@ public class User {
 
 	public User(String username, String password) {
 		this.username = username;
-		this.hash(password);
+		this.hashText(password);
 	}
 
 	public String getUsername() {
@@ -26,23 +25,32 @@ public class User {
 		this.username = username;
 	}
 
-	public MessageDigest getHashed() {
-		return hashed;
+	public String getDigest() {
+		return this.digest;
 	}
 
-	public void setHashed(MessageDigest hashed) {
-		this.hashed = hashed;
+	private void setDigest(String digest) {
+		this.digest = digest;
 	}
 
-	public void hash(String password) {
+	public String byteToHexString(byte[] input) {
+		String output = "";
+		for (int i = 0; i < input.length; ++i) {
+			output += String.format("%02X", input[i]);
+		}
+		return output;
+	}
+
+	public String hashText(String value) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(password.getBytes(), 0, password.length());
-			md.digest();
-			this.setHashed(md);
-
-		} catch (NoSuchAlgorithmException except) {
-			except.printStackTrace();
+			String hash = byteToHexString(md.digest(value.getBytes("UTF-8")));
+			this.setDigest(hash);
+			return hash;
+		} catch (NoSuchAlgorithmException e) {
+			return null;
+		} catch (UnsupportedEncodingException e) {
+			return null;
 		}
 	}
 
