@@ -60,7 +60,7 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		String password = this.getModelObject().getPassword();
 		User user = new User(username, password);
 
-		RepositorioUsuarios.instancia.autenticar(user, password);
+		RepositorioUsuarios.instancia.autenticar(user);
 		Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(user);
 
 		// La idea sería tener una clase intermedia o algo en el user tal que

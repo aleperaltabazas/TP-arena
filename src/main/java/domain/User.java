@@ -17,6 +17,11 @@ public class User {
 		this.hashText(password);
 	}
 
+	public User(User clone) {
+		this.username = clone.username;
+		this.digest = clone.digest;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -29,7 +34,7 @@ public class User {
 		return this.digest;
 	}
 
-	private void setDigest(String digest) {
+	public void setDigest(String digest) {
 		this.digest = digest;
 	}
 

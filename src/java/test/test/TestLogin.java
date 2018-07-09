@@ -28,8 +28,8 @@ public class TestLogin {
 
 	@Before
 	public void start() {
-		user1.hash("123");
-		user2.hash("888");
+		user1.hashText("123");
+		user2.hashText("888");
 
 		repoAlumnos.resetAlumnos();
 		repoUsuarios.resetUsuarios();
@@ -37,7 +37,7 @@ public class TestLogin {
 
 	@Test
 	public void testHasheo123Y456YDaDiferente() {
-		assertTrue(!user1.getHashed().equals(user2.getHashed()));
+		assertTrue(!user1.getDigest().equals(user2.getDigest()));
 	}
 
 	@Test
@@ -45,14 +45,15 @@ public class TestLogin {
 		repoUsuarios.agregarUsuario(userMati);
 		repoUsuarios.dameUsuario(userMati.getUsername());
 
-		repoUsuarios.validarPassword(userMati.getUsername(), userMati.getHashed());
+		repoUsuarios.validarPassword(userMati);
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void testAgregoAMatiYLoLogeoConOtraContraseñaYFalla() {
 		repoUsuarios.agregarUsuario(userMati);
+		userMati.setDigest("123");
 
-		repoUsuarios.validarPassword(userMati.getUsername(), lu.getHashed());
+		repoUsuarios.validarPassword(userMati);
 	}
 
 	@Test

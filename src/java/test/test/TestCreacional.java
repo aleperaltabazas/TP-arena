@@ -18,7 +18,7 @@ public class TestCreacional {
 	Parcial example_parcial = new Parcial(new NotaNumerica(4));
 	TrabajoPractico tp = new TrabajoPractico(nota6);
 	Parcial parcial = new Parcial(nota7);
-	
+
 	Asignacion sistemasOperativos = new Asignacion(3003, example_parcial);
 	Asignacion disenioDeSistemas = new Asignacion(3004, example_parcial);
 
@@ -27,8 +27,10 @@ public class TestCreacional {
 
 	@Before
 	public void inicializar() {
-		/*Repositorio.instancia.agregarAsignacion(sistemasOperativos);
-		Repositorio.instancia.agregarAsignacion(disenioDeSistemas);*/
+		/*
+		 * Repositorio.instancia.agregarAsignacion(sistemasOperativos);
+		 * Repositorio.instancia.agregarAsignacion(disenioDeSistemas);
+		 */
 
 		sistemasOperativos.agregarTarea(tp);
 		sistemasOperativos.agregarTarea(parcial);
@@ -38,10 +40,9 @@ public class TestCreacional {
 
 	@Test
 	public void testLaSumaDeLasNotasDeUnAlumnoEnSistemasOperativosEsLaSumaDeCadaNotaDeLaAsignacion() {
-		assertEquals(unAlumno.consultarNotas(sistemasOperativos).sum(),
-				sistemasOperativos.obtenerNotas().sum());
+		assertEquals(unAlumno.consultarNotas(sistemasOperativos).sum(), sistemasOperativos.obtenerNotas().sum());
 	}
-	
+
 	@Test
 	public void testLasTareasDeSistemasOperativosEsTPYParcial() {
 		assertTrue(sistemasOperativos.tareas.contains(tp));

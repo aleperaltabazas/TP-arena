@@ -13,14 +13,13 @@ import domain.Parcial;
 import domain.Tarea;
 
 public class TestAprobo {
-	
+
 	Parcial example_parcial = new Parcial(new NotaNumerica(6));
-	
+
 	Asignacion sistemasOperativos = new Asignacion(3003, example_parcial);
 	Asignacion disenioDeSistemas = new Asignacion(3004, example_parcial);
 
-	Alumno lu = new Alumno("Lucila", 2222222, "lusalmeron",
-			Arrays.asList(disenioDeSistemas, sistemasOperativos));
+	Alumno lu = new Alumno("Lucila", 2222222, "lusalmeron", Arrays.asList(disenioDeSistemas, sistemasOperativos));
 
 	NotaNumerica nota6 = new NotaNumerica(6);
 	NotaNumerica nota7 = new NotaNumerica(7);
@@ -45,13 +44,13 @@ public class TestAprobo {
 	public void testPreguntoSiApruebaParcial2YTiraExcepcionDeConsultaInvalida() {
 		assertTrue(sistemasOperativos.aprobo(parcial2));
 	}
-	
+
 	@Test
 	public void testCambioLaNotaDeParcial1A5YNoEstaAprobado() {
 		parcial1.cambiarNota(5);
 		assertFalse(sistemasOperativos.aprobo(parcial1));
 	}
-	
+
 	@Test
 	public void testCambioLaNotaDeParcial1ABYEstaAprobado() {
 		parcial1.cambiarNota("B");

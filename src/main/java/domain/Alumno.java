@@ -26,6 +26,14 @@ public class Alumno extends User {
 		this.asignaciones = Arrays.asList();
 	}
 
+	public Alumno(Alumno clone) {
+		super(clone);
+		this.nombre = clone.nombre;
+		this.legajo = clone.legajo;
+		this.asignaciones = clone.asignaciones;
+		this.usuarioGit = clone.usuarioGit;
+	}
+
 	public IntStream consultarNotas(Asignacion asignacion) {
 		return asignacion.obtenerNotas();
 	}

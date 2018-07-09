@@ -35,7 +35,7 @@ public class TestRepositorio {
 	@Test
 	public void testAgregoALuYEstaTodoOk() {
 		repoAlumnos.agregarAlumno(lu);
-		assertTrue(repoAlumnos.getAlumnos().contains(lu));
+		assertTrue(repoAlumnos.estaRegistrado(lu));
 	}
 
 	@Test(expected = RuntimeException.class)
@@ -46,7 +46,7 @@ public class TestRepositorio {
 	@Test
 	public void testPidoAMatiYMeDevuelveOk() {
 		Alumno mati_test = repoAlumnos.dameAlumno(userMati);
-		assertTrue(mati_test.equals(mati));
+		assertTrue(mati_test.getUsername().equals(mati.getUsername()));
 	}
 
 	@Test

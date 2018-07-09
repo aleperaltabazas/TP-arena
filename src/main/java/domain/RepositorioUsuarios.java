@@ -34,10 +34,10 @@ public class RepositorioUsuarios extends Repositorio {
 		this.usuarios.clear();
 	}
 
-	public void autenticar(User usuario, String password) {
+	public void autenticar(User usuario) {
 		this.validarNull(usuario);
 		this.identificar(usuario);
-		this.validarPassword(usuario, password);
+		this.validarPassword(usuario);
 	}
 
 	public void identificar(User usuario) {
@@ -50,7 +50,7 @@ public class RepositorioUsuarios extends Repositorio {
 		return this.getUsuarios().stream().anyMatch(u -> u.getUsername().equals(usuario.getUsername()));
 	}
 
-	public void validarPassword(User usuario, String password) {
+	public void validarPassword(User usuario) {
 		User user = this.dameUsuario(usuario.getUsername());
 
 		if (!user.getDigest().equals(usuario.getDigest())) {
@@ -61,7 +61,9 @@ public class RepositorioUsuarios extends Repositorio {
 	public void agregarUsuario(User usuario) {
 		this.validarNull(usuario);
 		this.validarDuplicado(usuario);
-		usuarios.add(usuario);
+
+		User nuevoUsuario = new User(usuario);
+		usuarios.add(nuevoUsuario);
 	}
 
 	public void validarDuplicado(User usuario) {

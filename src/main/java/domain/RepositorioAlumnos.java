@@ -32,11 +32,13 @@ public class RepositorioAlumnos extends Repositorio {
 
 	public void agregarAlumno(Alumno alumno) {
 		this.validarNoExiste(alumno);
-		alumnos.add(alumno);
+
+		Alumno nuevoAlumno = new Alumno(alumno);
+		alumnos.add(nuevoAlumno);
 	}
 
 	public void validarNoExiste(Alumno alumno) {
-		if (this.getAlumnos().stream().anyMatch(a -> a.getUsername().equals(alumno.getUsername()))) {
+		if (this.estaRegistrado(alumno)) {
 			throw new RuntimeException("Entrada repetida.");
 		}
 	}
@@ -47,7 +49,7 @@ public class RepositorioAlumnos extends Repositorio {
 	}
 
 	public boolean estaRegistrado(Alumno alumno) {
-		return this.getAlumnos().stream().anyMatch(a -> a.equals(alumno));
+		return this.getAlumnos().stream().anyMatch(a -> a.getUsername().equals(alumno.getUsername()));
 	}
 
 }
