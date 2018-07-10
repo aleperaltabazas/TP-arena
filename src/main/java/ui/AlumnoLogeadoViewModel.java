@@ -13,7 +13,7 @@ public class AlumnoLogeadoViewModel {
 	private long legajoAlumno;
 	private String gitAlumno;
 	private List<Asignacion> asignaciones;
-	
+
 	public AlumnoLogeadoViewModel(Alumno alumno) {
 		this.modelAlumno = alumno;
 		this.nombreAlumno = alumno.getNombre();

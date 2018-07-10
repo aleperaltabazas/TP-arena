@@ -6,7 +6,7 @@ public class NotaConceptual implements Nota {
 	public NotaConceptual(String nota) {
 		this.nota = nota;
 	}
-	
+
 	public int getCalificacion() {
 		if (nota.equals("E"))
 			return 10;
@@ -23,5 +23,9 @@ public class NotaConceptual implements Nota {
 
 	public boolean estaAprobado() {
 		return this.getCalificacion() >= 6;
+	}
+
+	public String notaAsString() {
+		return this.nota.toString();
 	}
 }

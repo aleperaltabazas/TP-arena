@@ -12,15 +12,15 @@ public class Asignacion {
 
 	public Asignacion(int codigo, Tarea unaTarea) {
 		this.codigo = codigo;
-		this.tareas.add(unaTarea) ;
+		this.tareas.add(unaTarea);
 	}
 
 	public int getCodigo() {
 		return this.codigo;
 	}
 
-	public Stream<Tarea> getTareas() {
-		return this.tareas.stream();
+	public List<Tarea> getTareas() {
+		return this.tareas;
 	}
 
 	public void agregarTarea(Tarea unaTarea) {
@@ -30,20 +30,34 @@ public class Asignacion {
 	public IntStream obtenerNotas() {
 		return tareas.stream().mapToInt(t -> t.getNota().getCalificacion());
 	}
-	
+
 	public boolean tieneTarea(Tarea tarea) {
 		return tareas.contains(tarea);
 	}
-	
+
 	public boolean aprobo(Tarea tarea) {
 		this.validar(tarea);
 		return tarea.aprobo();
 	}
-	
-	public void validar(Tarea tarea)  {
-		if(!this.tieneTarea(tarea)) {
+
+	public void validar(Tarea tarea) {
+		if (!this.tieneTarea(tarea)) {
 			throw new RuntimeException("Consultando tarea inválida.");
 		}
+	}
+
+	public String notasAsString() {
+		String notas = "";
+
+		int length = this.getTareas().size();
+
+		for (int i = 0; i < length; i++) {
+			Tarea t = this.getTareas().get(i);
+			notas += t.notaAsString();
+			notas += " ";
+		}
+
+		return notas;
 	}
 
 }

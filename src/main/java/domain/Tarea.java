@@ -22,4 +22,8 @@ public class Tarea {
 	public void cambiarNota(String nuevaNota) {
 		this.nota = new NotaConceptual(nuevaNota);
 	}
+	
+	public String notaAsString(){
+		return this.getNota().notaAsString();
+	}
 }
