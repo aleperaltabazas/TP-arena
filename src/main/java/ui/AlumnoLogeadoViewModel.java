@@ -66,4 +66,9 @@ public class AlumnoLogeadoViewModel {
 		this.modelAlumno.actualizarDatos(this.getNombreAlumno(), this.getLegajoAlumno(), this.getGitAlumno());
 	}
 
+	public void validarDatos() {
+		if (this.getNombreAlumno().equals(null) || this.getGitAlumno().equals(null) || this.getLegajoAlumno() == 0) {
+			throw new RuntimeException("Datos invalidos");
+		}		
+	}
 }
