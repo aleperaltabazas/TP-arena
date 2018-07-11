@@ -13,6 +13,7 @@ public class AlumnoLogeadoViewModel {
 	private long legajoAlumno;
 	private String gitAlumno;
 	private List<Asignacion> asignaciones;
+	private String nota;
 
 	public AlumnoLogeadoViewModel(Alumno alumno) {
 		this.modelAlumno = alumno;
@@ -66,9 +67,25 @@ public class AlumnoLogeadoViewModel {
 		this.modelAlumno.actualizarDatos(this.getNombreAlumno(), this.getLegajoAlumno(), this.getGitAlumno());
 	}
 
+	public String getNota() {
+		return nota;
+	}
+
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
+
 	public void validarDatos() {
 		if (this.getNombreAlumno().equals(null) || this.getGitAlumno().equals(null) || this.getLegajoAlumno() == 0) {
 			throw new RuntimeException("Datos invalidos");
-		}		
+		}
+	}
+
+	public void notaActual() {
+		this.setNota("10");
+	}
+
+	public void todasLasNotas() {
+		this.setNota("2, 2, B");
 	}
 }

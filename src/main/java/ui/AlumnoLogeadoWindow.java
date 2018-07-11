@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 
 import org.uqbar.arena.layout.ColumnLayout;
+import org.uqbar.arena.layout.HorizontalLayout;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
@@ -46,6 +47,9 @@ public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 		Panel panelInfDer = new Panel(panelInferior);
 		panelInfDer.setLayout(new VerticalLayout());
 
+		Panel panelCerrar = new Panel(mainPanel);
+		panelCerrar.setLayout(new HorizontalLayout());
+
 		new Label(panelSuperior).setText("¡Bienvenido! ¿Qué desea hacer?");
 
 		new Label(panelMedIzq).setText("Nombre:");
@@ -60,6 +64,8 @@ public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 		new Button(panelInfIzq).setCaption("Modificar datos de usuario").onClick(this::modificarDatos);
 
 		new Button(panelInfDer).setCaption("Ver notas").onClick(this::verNotas);
+		Button botonCerrar = new Button(panelCerrar).setCaption("Cerrar sesión").onClick(this::close);
+		botonCerrar.alignRight();
 
 	}
 

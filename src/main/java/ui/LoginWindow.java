@@ -12,7 +12,6 @@ import org.uqbar.arena.widgets.PasswordField;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MainWindow;
-import org.uqbar.arena.windows.WindowOwner;
 
 import domain.Alumno;
 import domain.RepositorioAlumnos;
@@ -93,7 +92,6 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		mainView.open();
 		mainView.onAccept(() -> {
 		});
-		mainView.onCancel(this::close);
 	}
 
 	public void subirNotas() {

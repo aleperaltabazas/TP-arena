@@ -62,4 +62,8 @@ public class Asignacion {
 		return notas;
 	}
 
+	public String ultimaNota() {
+		return this.getTareas().get(this.getTareas().size() - 1).notaAsString();
+	}
+
 }
