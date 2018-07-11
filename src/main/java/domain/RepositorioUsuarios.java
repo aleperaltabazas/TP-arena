@@ -96,6 +96,7 @@ public class RepositorioUsuarios extends Repositorio {
 	}
 
 	public void testHardcodeadoLosOdio() {
+		this.resetUsuarios();
 		User mati = new User("matigiorda", "123");
 		User lu = new User("lusalmeron", "456");
 		User ale = new User("aleperaltabazas", "789");

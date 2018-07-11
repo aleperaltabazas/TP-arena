@@ -56,6 +56,18 @@ public class Alumno extends User {
 		this.usuarioGit = nuevoUsuarioGit;
 	}
 
+	public String notaDe(Asignacion asignacion) {
+		this.validarTiene(asignacion);
+
+		return asignacion.notasAsString();
+	}
+
+	public void validarTiene(Asignacion asignacion) {
+		if (!this.getAsignaciones().stream().anyMatch(a -> a.getCodigo() == asignacion.getCodigo())) {
+			throw new RuntimeException("Asignación no pertenece al alumno");
+		}
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

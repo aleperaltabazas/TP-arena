@@ -81,21 +81,24 @@ public class RepositorioAlumnos extends Repositorio {
 		TrabajoPractico tpAnualMati = new TrabajoPractico(new NotaConceptual("B"));
 		TrabajoPractico tpArenaMati = new TrabajoPractico(new NotaConceptual("M"));
 
-		Asignacion disenioMati = new Asignacion(3002, primerParcialMati);
-		disenioMati.agregarTarea(tpAnualMati);
-		disenioMati.agregarTarea(tpArenaMati);
-
 		Parcial primerParcialLu = new Parcial(new NotaNumerica(2));
 		TrabajoPractico tpAnualLu = new TrabajoPractico(new NotaConceptual("B"));
 		TrabajoPractico tpArenaLu = new TrabajoPractico(new NotaConceptual("M"));
 
-		Asignacion disenioLu = new Asignacion(3002, primerParcialLu);
-		disenioLu.agregarTarea(tpAnualLu);
-		disenioLu.agregarTarea(tpArenaLu);
-
 		Parcial primerParcialAle = new Parcial(new NotaNumerica(7));
 		Parcial segundoParcialAle = new Parcial(new NotaNumerica(2));
 		TrabajoPractico tpSOAle = new TrabajoPractico(new NotaNumerica(8));
+
+		TrabajoPractico laboratorioAle = new TrabajoPractico(new NotaConceptual("B"));
+		Asignacion fisicaAle = new Asignacion(3001, laboratorioAle);
+
+		Asignacion disenioMati = new Asignacion(3002, primerParcialMati);
+		disenioMati.agregarTarea(tpAnualMati);
+		disenioMati.agregarTarea(tpArenaMati);
+
+		Asignacion disenioLu = new Asignacion(3002, primerParcialLu);
+		disenioLu.agregarTarea(tpAnualLu);
+		disenioLu.agregarTarea(tpArenaLu);
 
 		Asignacion sisOpAle = new Asignacion(3013, tpSOAle);
 		sisOpAle.agregarTarea(primerParcialAle);
@@ -115,10 +118,8 @@ public class RepositorioAlumnos extends Repositorio {
 		Alumno ale = new Alumno("Alejandro Peralta Bazas", 1595465, "aleperaltabazas", asignacionesAle,
 				"aleperaltabazas", "789");
 
-		mati.agregarAsignacion(disenioMati);
-		lu.agregarAsignacion(disenioLu);
-		ale.agregarAsignacion(sisOpAle);
-
+		ale.agregarAsignacion(fisicaAle);
+		
 		this.agregarAlumno(mati);
 		this.agregarAlumno(lu);
 		this.agregarAlumno(ale);
