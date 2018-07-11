@@ -12,16 +12,9 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MainWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
-import domain.Alumno;
-import domain.Asignacion;
-import domain.NotaConceptual;
-import domain.NotaNumerica;
-import domain.Parcial;
-import domain.RepositorioAlumnos;
-import domain.TrabajoPractico;
-import domain.User;
+import domain.*;
 
-//IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
+//IMPORTANTE: correr con -Djava.system.class.loader=org.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
 public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 	Alumno alumno;
@@ -71,7 +64,7 @@ public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 	}
 
 	public void modificarDatos() {
-		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this, this.getAlumno());
+		Dialog<?> dialogModificarDatos = new ModificarDatosWindow(this, this.getAlumno(), this.getModelObject());
 		dialogModificarDatos.open();
 		dialogModificarDatos.onAccept(() -> {
 		});
@@ -82,10 +75,6 @@ public class AlumnoLogeadoWindow extends Dialog<AlumnoLogeadoViewModel> {
 		dialogVerNotas.open();
 		dialogVerNotas.onAccept(() -> {
 		});
-	}
-
-	public static void main(String args[]) {
-
 	}
 
 	public Alumno getAlumno() {
