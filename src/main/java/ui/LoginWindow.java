@@ -12,6 +12,8 @@ import org.uqbar.arena.widgets.PasswordField;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.SimpleWindow;
+import org.uqbar.arena.windows.WindowOwner;
 
 import domain.Alumno;
 import domain.RepositorioAlumnos;
@@ -20,13 +22,13 @@ import domain.User;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 @SuppressWarnings("serial")
-public class LoginWindow extends MainWindow<LoginViewModel> {
-	public LoginWindow() {
-		super(new LoginViewModel());
+public class LoginWindow extends SimpleWindow<LoginViewModel> {
+	public LoginWindow(WindowOwner parent) {
+		super(parent, new LoginViewModel());
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
+	public void createFormPanel(Panel mainPanel) {
 		this.setTitle("Sistema de Notas");
 
 		// this.setIconImage("tree.png");
@@ -44,9 +46,6 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		Label password = new Label(panelContrasenia).setText("Contraseña");
 		PasswordField passwordBox = new PasswordField(panelContrasenia);
 
-		Button okButton = new Button(panelBotones).setCaption("Ok");
-		Button registerButton = new Button(panelBotones).setCaption("Registrar");
-
 		new Label(panelSuperior).setText("Ingrese su usuario y contraseña.");
 
 		userBox.bindValueToProperty("user");
@@ -55,14 +54,6 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		userBox.setWidth(120);
 		passwordBox.setWidth(120);
 
-		okButton.setWidth(80);
-		okButton.alignCenter();
-
-		registerButton.setWidth(80);
-		registerButton.alignCenter();
-
-		okButton.onClick(this::login);
-		registerButton.onClick(this::registrar);
 	}
 
 	public void registrar() {
@@ -75,7 +66,12 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 	}
 
 	public void login() {
-		this.getModelObject().login();
+		try {
+			this.getModelObject().login();
+		} catch (RuntimeException e) {
+			new ErrorPanelWindow();
+			return;
+		}
 
 		String username = this.getModelObject().getUser();
 		String password = this.getModelObject().getPassword();
@@ -101,8 +97,19 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		});
 	}
 
-	public static void main(String[] args) {
-		new LoginWindow().startApplication();
+	@Override
+	protected void addActions(Panel actionsPanel) {
+		Button okButton = new Button(actionsPanel).setCaption("Ok");
+		Button registerButton = new Button(actionsPanel).setCaption("Registrar");
+
+		okButton.setWidth(80);
+		okButton.alignCenter();
+
+		registerButton.setWidth(80);
+		registerButton.alignCenter();
+
+		okButton.onClick(this::login);
+		registerButton.onClick(this::registrar);
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class RepositorioUsuarios extends Repositorio {
 	private RepositorioUsuarios() {
-		this.testHardcodeadoLosOdio();
+
 	}
 
 	public static RepositorioUsuarios instancia = new RepositorioUsuarios();
@@ -95,14 +95,4 @@ public class RepositorioUsuarios extends Repositorio {
 		}
 	}
 
-	public void testHardcodeadoLosOdio() {
-		this.resetUsuarios();
-		User mati = new User("matigiorda", "123");
-		User lu = new User("lusalmeron", "456");
-		User ale = new User("aleperaltabazas", "789");
-
-		this.agregarUsuario(mati);
-		this.agregarUsuario(lu);
-		this.agregarUsuario(ale);
-	}
 }

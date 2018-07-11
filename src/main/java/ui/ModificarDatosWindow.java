@@ -39,10 +39,15 @@ public class ModificarDatosWindow extends Dialog<AlumnoLogeadoViewModel> {
 	}
 
 	public void actualizar() {
-		this.getModelObject().validarDatos();
-		this.getModelObject().modificarDatos();
-		this.viewModel.setNombreAlumno(this.getModelObject().getNombreAlumno());
-		this.viewModel.setLegajoAlumno(this.getModelObject().getLegajoAlumno());
-		this.viewModel.setGitAlumno(this.getModelObject().getGitAlumno());
+		try {
+			this.getModelObject().validarDatos();
+			this.getModelObject().modificarDatos();
+			this.viewModel.setNombreAlumno(this.getModelObject().getNombreAlumno());
+			this.viewModel.setLegajoAlumno(this.getModelObject().getLegajoAlumno());
+			this.viewModel.setGitAlumno(this.getModelObject().getGitAlumno());
+		} catch (RuntimeException e) {
+			this.showError(e.getMessage());
+		}
+
 	}
 }
