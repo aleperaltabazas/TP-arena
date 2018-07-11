@@ -42,7 +42,7 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		Label username = new Label(panelUsuario).setText("Nombre de usuario");
 		TextBox userBox = new TextBox(panelUsuario);
 
-		Label password = new Label(panelContrasenia).setText("Contrseña");
+		Label password = new Label(panelContrasenia).setText("Contraseña");
 		PasswordField passwordBox = new PasswordField(panelContrasenia);
 
 		Button okButton = new Button(panelBotones).setCaption("Ok");
