@@ -63,7 +63,13 @@ public class RegistrarWindow extends Dialog<RegisterViewModel> {
 	}
 
 	public void registrar() {
-		this.getModelObject().crearAlumno();
+		try {
+			this.getModelObject().crearAlumno();
+		} catch (RuntimeException e) {
+			this.showError("Por favor, complete todos los campos");
+		}
+
+		this.showInfo("Usuario creado correctamente!");
 		this.close();
 	}
 }

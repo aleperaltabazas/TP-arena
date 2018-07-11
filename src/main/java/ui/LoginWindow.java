@@ -38,8 +38,6 @@ public class LoginWindow extends SimpleWindow<LoginViewModel> {
 		Panel panelUsuario = new Panel(mainPanel).setLayout(new ColumnLayout(2));
 		Panel panelContrasenia = new Panel(mainPanel).setLayout(new ColumnLayout(2));
 
-		Panel panelBotones = new Panel(mainPanel).setLayout(new ColumnLayout(2));
-
 		Label username = new Label(panelUsuario).setText("Nombre de usuario");
 		TextBox userBox = new TextBox(panelUsuario);
 
@@ -68,8 +66,9 @@ public class LoginWindow extends SimpleWindow<LoginViewModel> {
 	public void login() {
 		try {
 			this.getModelObject().login();
-		} catch (RuntimeException e) {
-			new ErrorPanelWindow();
+		} catch (Exception e) {
+			this.showError("Por favor, complete todos los campos");
+
 			return;
 		}
 
@@ -77,17 +76,19 @@ public class LoginWindow extends SimpleWindow<LoginViewModel> {
 		String password = this.getModelObject().getPassword();
 		User user = new User(username, password);
 
-		RepositorioUsuarios.instancia.autenticar(user);
-		Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(user);
+		try {
+			RepositorioUsuarios.instancia.autenticar(user);
+			Alumno alumno = RepositorioAlumnos.instancia.dameAlumno(user);
 
-		// La idea sería tener una clase intermedia o algo en el user tal que
-		// podamos saber si se logea un alumno o un profesor sin tener que usar
-		// ifs
+			Dialog<?> mainView = new AlumnoLogeadoWindow(this, alumno);
+			mainView.open();
+			mainView.onAccept(() -> {
+			});
+		} catch (Exception e) {
+			this.showError("Oops, parece que hubo un error con el logueo...\n Intente de nuevo");
+			return;
+		}
 
-		Dialog<?> mainView = new AlumnoLogeadoWindow(this, alumno);
-		mainView.open();
-		mainView.onAccept(() -> {
-		});
 	}
 
 	public void subirNotas() {
@@ -99,8 +100,15 @@ public class LoginWindow extends SimpleWindow<LoginViewModel> {
 
 	@Override
 	protected void addActions(Panel actionsPanel) {
-		Button okButton = new Button(actionsPanel).setCaption("Ok");
-		Button registerButton = new Button(actionsPanel).setCaption("Registrar");
+		Panel panelBotones = new Panel(actionsPanel).setLayout(new ColumnLayout(2));
+		Panel panelOk = new Panel(panelBotones);
+		panelOk.setLayout(new VerticalLayout());
+
+		Panel panelRegistrar = new Panel(panelBotones);
+		panelRegistrar.setLayout(new VerticalLayout());
+
+		Button okButton = new Button(panelOk).setCaption("Ok");
+		Button registerButton = new Button(panelRegistrar).setCaption("Registrar");
 
 		okButton.setWidth(80);
 		okButton.alignCenter();

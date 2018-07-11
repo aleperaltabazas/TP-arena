@@ -41,13 +41,15 @@ public class ModificarDatosWindow extends Dialog<AlumnoLogeadoViewModel> {
 	public void actualizar() {
 		try {
 			this.getModelObject().validarDatos();
-			this.getModelObject().modificarDatos();
-			this.viewModel.setNombreAlumno(this.getModelObject().getNombreAlumno());
-			this.viewModel.setLegajoAlumno(this.getModelObject().getLegajoAlumno());
-			this.viewModel.setGitAlumno(this.getModelObject().getGitAlumno());
 		} catch (RuntimeException e) {
-			this.showError(e.getMessage());
+			this.showError(
+					"Datos inválidos. Por favor, verifique que ningún campo haya quedado vacío o tenga caracteres incorrectos");
 		}
+
+		this.getModelObject().modificarDatos();
+		this.viewModel.setNombreAlumno(this.getModelObject().getNombreAlumno());
+		this.viewModel.setLegajoAlumno(this.getModelObject().getLegajoAlumno());
+		this.viewModel.setGitAlumno(this.getModelObject().getGitAlumno());
 
 	}
 }
