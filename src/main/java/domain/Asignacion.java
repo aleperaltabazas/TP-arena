@@ -52,9 +52,11 @@ public class Asignacion {
 		int length = this.getTareas().size();
 
 		for (int i = 0; i < length; i++) {
+			if (i > 0) {
+				notas += ", ";
+			}
 			Tarea t = this.getTareas().get(i);
 			notas += t.notaAsString();
-			notas += " ";
 		}
 
 		return notas;

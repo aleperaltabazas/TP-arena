@@ -30,7 +30,7 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 	public void createContents(Panel mainPanel) {
 		this.setTitle("Sistema de Notas");
 
-		//this.setIconImage("tree.png");
+		// this.setIconImage("tree.png");
 
 		Panel panelSuperior = new Panel(mainPanel).setLayout(new VerticalLayout());
 
@@ -94,6 +94,13 @@ public class LoginWindow extends MainWindow<LoginViewModel> {
 		mainView.onAccept(() -> {
 		});
 		mainView.onCancel(this::close);
+	}
+
+	public void subirNotas() {
+		Dialog<?> subirNotasView = new SubirNotasWindow(this);
+		subirNotasView.open();
+		subirNotasView.onAccept(() -> {
+		});
 	}
 
 	public static void main(String[] args) {

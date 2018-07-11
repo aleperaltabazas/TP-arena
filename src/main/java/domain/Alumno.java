@@ -1,8 +1,12 @@
 package domain;
 
+import java.util.List;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
+
+import ui.SubirNotasViewModel;
 
 public class Alumno extends User {
 	String nombre;
@@ -23,7 +27,15 @@ public class Alumno extends User {
 		this.nombre = nombre;
 		this.legajo = legajo;
 		this.usuarioGit = usuarioGit;
-		this.asignaciones = Arrays.asList();
+	}
+
+	public Alumno(String nombre, long legajo, String usuarioGit, List<Asignacion> asignaciones, String username,
+			String password) {
+		super(username, password);
+		this.nombre = nombre;
+		this.legajo = legajo;
+		this.usuarioGit = usuarioGit;
+		this.asignaciones = asignaciones;
 	}
 
 	public Alumno(Alumno clone) {
@@ -72,4 +84,37 @@ public class Alumno extends User {
 		this.usuarioGit = unGit;
 	}
 
+	public void agregarAsignacion(Asignacion asignacion) {
+		this.asignaciones.add(asignacion);
+	}
+
+	public void actualizarNotas(SubirNotasViewModel viewModel) {
+		if (!this.existe(viewModel.getAsignacion())) {
+			this.nuevaAsignacion(viewModel.getAsignacion());
+			this.actualizarNotas(viewModel);
+		}
+
+		Asignacion asignacion = this.find(viewModel.getAsignacion());
+		this.asignaciones.remove(asignacion);
+
+	}
+
+	public Asignacion find(String asignacion) {
+		Optional<Asignacion> ret = this.getAsignaciones().stream()
+				.filter(a -> a.getCodigo() == Integer.parseInt(asignacion)).findFirst();
+
+		if (!ret.isPresent()) {
+			throw new NullPointerException("Asignación inexistente.");
+		}
+
+		return ret.get();
+	}
+
+	public boolean existe(String asignacion) {
+		return this.getAsignaciones().stream().anyMatch(a -> a.getCodigo() == Integer.parseInt(asignacion));
+	}
+
+	public void nuevaAsignacion(String asignacion) {
+
+	}
 }

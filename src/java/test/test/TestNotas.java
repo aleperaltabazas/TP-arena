@@ -40,7 +40,7 @@ public class TestNotas {
 
 	@Test
 	public void testLasNotasDeAsignacion8Es888() {
-		assertEquals("8 8 8 ", asignacion.notasAsString());
+		assertEquals("8, 8, 8", asignacion.notasAsString());
 	}
 
 }

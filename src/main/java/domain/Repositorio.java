@@ -22,10 +22,10 @@ public abstract class Repositorio {
 		return ret.get();
 	}
 
-	public Alumno findAlumno(String name, ArrayList<Alumno> lista) {
-		this.validarNull(name);
+	public Alumno findAlumno(String username, ArrayList<Alumno> lista) {
+		this.validarNull(username);
 
-		Optional<Alumno> ret = lista.stream().filter(u -> u.getUsername().equals(name)).findFirst();
+		Optional<Alumno> ret = lista.stream().filter(u -> u.getUsername().equals(username)).findFirst();
 
 		if (!ret.isPresent()) {
 			throw new NullPointerException("Entrada inválida.");
@@ -33,4 +33,29 @@ public abstract class Repositorio {
 
 		return ret.get();
 	}
+
+	public Alumno findByName(String nombre, ArrayList<Alumno> lista) {
+		this.validarNull(nombre);
+
+		Optional<Alumno> ret = lista.stream().filter(u -> u.getNombre().equals(nombre)).findFirst();
+
+		if (!ret.isPresent()) {
+			throw new NullPointerException("Etnrada inválida.");
+		}
+
+		return ret.get();
+	}
+
+	public Alumno findByLegajo(long legajo, ArrayList<Alumno> lista) {
+		this.validarNull(legajo);
+
+		Optional<Alumno> ret = lista.stream().filter(u -> u.getLegajo() == legajo).findFirst();
+
+		if (!ret.isPresent()) {
+			throw new NullPointerException("Entrada inválida.");
+		}
+
+		return ret.get();
+	}
+
 }
